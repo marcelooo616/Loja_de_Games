@@ -35,26 +35,26 @@ public class ProdutoController {
 	
 	
 	@Autowired
-	private ProdutoRepository repository;
+	private ProdutoRepository produtoRepository;
 	
 	 @GetMapping 
 	 public ResponseEntity<List<Produto>> GetAll(){
-		 return ResponseEntity.ok(repository.findAll());
+		 return ResponseEntity.ok(produtoRepository.findAll());
 	 }
 	 
 	 @PostMapping
 	 public ResponseEntity<Produto> inserirProduto(@RequestBody Produto produto){
-		 return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
+		 return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produto));
 	 }
 	 
 	 @PutMapping
 	 public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto produto){
-		 return ResponseEntity.ok().body(repository.save(produto));
+		 return ResponseEntity.ok().body(produtoRepository.save(produto));
 	 }
 	 
 	 @DeleteMapping("/{id}")
-	 public void delete(@PathVariable long id ) {
-		 repository.deleteById(id);
+	 public void delete(@PathVariable Long id ) {
+		 produtoRepository.deleteById(id);
 	 }
 	
 		 

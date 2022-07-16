@@ -1,12 +1,22 @@
 package com.generation.loja_de_games.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -17,23 +27,27 @@ public class Usuario {
     private Long id;
 	
 	@NotBlank
-	@Size(min = 2, max = 100)
+	@Size(min = 2, max = 20)
 	private String nome;
 	
-	
-	@NotBlank
-	@Size(min = 5, max = 100)
+	@Schema(example = "email@email.com.br")
+	@NotBlank(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
+	@Size(min = 5, max = 20)
 	private String usuario;
 	
 	
-	@NotBlank
-	@Size(min = 5, max = 100)
+	@Schema(example = "Casa_616")
+	@NotBlank(message = "O atributo Senha é Obrigatório!")
+	@Size(min = 5, max = 10)
+	@Pattern(regexp = "\\A(?=\\S*?[0-9])(?=\\S*?[a-z])(?=\\S*?[A-Z])(?=\\S*?[@#$%^&+=_-/.<>;:-&¨!'])\\S{8,}\\z", message = "O atributo Senha deve conter caracter especial e maiusculo")
 	private String senha;
 	
 	private String foto;
 	
-	
-	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("usuario")
+	private List<Produto> produto;	
 	
 	public Usuario(Long id, @NotBlank @Size(min = 2, max = 100) String nome,
 			@NotBlank @Size(min = 5, max = 100) String usuario, @NotBlank @Size(min = 5, max = 100) String senha,
@@ -72,7 +86,7 @@ public class Usuario {
 		return foto;
 	}
 	public void setFoto(String foto) {
-		foto = foto;
+		this.foto = foto;
 	}
 	
 	

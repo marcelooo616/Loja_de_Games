@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,53 +17,77 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Produto {
 	
 	@Id
-	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@NotBlank(message = "O atributo título é Obrigatório e não pode utilizar espaços em branco!")
+	@Size(min = 5, max = 20, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
 	private String nome;
-	private double valor;
-	private int lancamento;
-	
+	@NotBlank(message = "O atributo título é Obrigatório e não pode utilizar espaços em branco!")
+	private Double valor;
+	@NotBlank(message = "O atributo título é Obrigatório e não pode utilizar espaços em branco!")
+	private Integer quantidade;
+	@NotBlank(message = "O atributo título é Obrigatório e não pode utilizar espaços em branco!")	
+	@Min(4)
+	private Integer lancamento;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
-	//private String genero; // FK
-	//private int quantidadse;// FK
-	//private int codigo;// Fk 
-
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
 	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public double getValor() {
+
+	public Double getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public int getLancamento() {
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Integer getLancamento() {
 		return lancamento;
 	}
-	public void setLancamento(int lancamento) {
+
+	public void setLancamento(Integer lancamento) {
 		this.lancamento = lancamento;
 	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
+
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	
+	
 	
 	
 	

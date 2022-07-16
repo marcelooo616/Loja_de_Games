@@ -25,26 +25,26 @@ import com.generation.loja_de_games.repository.CategoriaRepository;
 public class CategoriaController {
 	
 	@Autowired
-	private CategoriaRepository repository;
+	private CategoriaRepository categoriaRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<Categoria>> GetAll(){
-		return ResponseEntity.ok(repository.findAll());
+		return ResponseEntity.ok(categoriaRepository.findAll());
 	}
 	
 	@PostMapping
 	 public ResponseEntity<Categoria> inserirCategoria(@RequestBody Categoria categoria){
-		 return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
+		 return ResponseEntity.status(HttpStatus.CREATED).body(categoriaRepository.save(categoria));
 	 }
 	
 	@PutMapping
 	 public ResponseEntity<Categoria> atualizarProduto(@RequestBody Categoria categoria){
-		 return ResponseEntity.ok().body(repository.save(categoria));
+		 return ResponseEntity.ok().body(categoriaRepository.save(categoria));
 	 }
 	
 	@DeleteMapping("/{id}")
 	 public void delete(@PathVariable long id ) {
-		 repository.deleteById(id);
+		categoriaRepository.deleteById(id);
 	 }
 
 }
