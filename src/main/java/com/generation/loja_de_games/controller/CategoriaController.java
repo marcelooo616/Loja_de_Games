@@ -22,7 +22,7 @@ import com.generation.loja_de_games.repository.CategoriaRepository;
 @RequestMapping("/categoria")
 @CrossOrigin( "*")
 
-public class ControlerCategoria {
+public class CategoriaController {
 	
 	@Autowired
 	private CategoriaRepository repository;

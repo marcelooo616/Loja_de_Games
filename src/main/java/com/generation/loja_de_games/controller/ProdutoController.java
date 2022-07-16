@@ -31,7 +31,7 @@ import com.generation.loja_de_games.repository.ProdutoRepository;
 @RequestMapping("/produto")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
-public class ControllerProduto {
+public class ProdutoController {
 	
 	
 	@Autowired
